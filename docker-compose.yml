@@ -1,0 +1,11 @@
+version: "2.0"
+services:
+  app:
+    build: .
+    volumes:
+      - ./output:/src/output
+    entrypoint:
+      - "/usr/bin/php"
+      - "/src/run_cdr.php"
+    env_file:
+      .env
