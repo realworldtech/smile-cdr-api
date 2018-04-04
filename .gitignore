@@ -91,3 +91,4 @@ ssl
 .env
 dependencies
 data
+output
