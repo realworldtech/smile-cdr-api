@@ -14,7 +14,7 @@ function getAccount($usn)
 
   global $soapuser, $soappass, $soapdomain;
   $login = array('login' => $soapuser,'password' => $soappass, 'trace' => 1);
-  $wsdl_url= "https://$soapdomain/ws/v2/account?wsdl";
+  $wsdl_url= "https://$soapdomain/live/ws/v2/account?wsdl";
   use_soap_error_handler(false);
   try {
     $client = new SOAPClient($wsdl_url,$login);
@@ -199,21 +199,15 @@ if (isset($options["c"])) {
 
 //iterate t
 foreach ($subs->Subscription as $sub) {
-  //if ($sub->EnabledStatus=='Active')
-  //var_dump($sub);
-  //echo $sub->USN.PHP_EOL;
-  //if ($sub->USN != "2142434295") continue;
 
   $username = findPropertyByName('username', 'String', $sub->Properties);
   $usn = $sub->USN;
   if (file_exists($dir.'/'.$username.'-'.$usn.'.csv')) continue;
   echo $usn." $sub->ServiceName ($username)".PHP_EOL;
   $periods = getRatingPeriods($usn);
-  //print_r($periods);
   $periodList = $periods->RatingPeriodList->RatingPeriodSummary;
   if (!is_array($periodList)) continue;
   $period = $periodList[count($periodList)-2];
-  //print_r($period);
   $periodID = $period->ratingPeriodId;
   if ($period->invoicingPeriodEnd == False) {
     sleep(1);
@@ -230,7 +224,6 @@ foreach ($subs->Subscription as $sub) {
 
   //$url = getActivityStatementBatch($usn, 0);
   $urlObj = getRatingsForPeriod($periodID);
-  //print_r($urlObj);
   if ($urlObj != NULL) {
       $url = $urlObj->ActivityBatchURL->URL;
       $ch = curl_init();
@@ -243,8 +236,6 @@ foreach ($subs->Subscription as $sub) {
       $fh = fopen ($dir.'/'.$username.'-'.$usn.'.csv', 'w');
       fwrite($fh, $result);
       fclose($fh);
-      //echo $result;
-      //echo PHP_EOL;
   } else {
     print " -URL was not provided for this service, can't get usage".PHP_EOL;
   }
