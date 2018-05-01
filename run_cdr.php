@@ -14,7 +14,7 @@ function getAccount($usn)
 
   global $soapuser, $soappass, $soapdomain;
   $login = array('login' => $soapuser,'password' => $soappass, 'trace' => 1);
-  $wsdl_url= "https://$soapdomain/live/ws/v2/account?wsdl";
+  $wsdl_url= "https://$soapdomain/live/smile/ws/v2/account?wsdl";
   use_soap_error_handler(false);
   try {
     $client = new SOAPClient($wsdl_url,$login);
@@ -31,7 +31,7 @@ function getAccount($usn)
 function getRatingPeriods($usn) {
   global $soapuser, $soappass, $soapdomain;
   $login = array('login' => $soapuser,'password' => $soappass, 'trace' => 1);
-  $wsdl_url= "https://$soapdomain/live/ws/v2/subscription?wsdl";
+  $wsdl_url= "https://$soapdomain/live/smile/ws/v2/subscription?wsdl";
   use_soap_error_handler(false);
   try {
     $client = new SOAPClient($wsdl_url,$login);
@@ -59,7 +59,7 @@ function getRatingPeriods($usn) {
 function getRatingsForPeriod($periodID) {
   global $soapuser, $soappass, $soapdomain;
   $login = array('login' => $soapuser,'password' => $soappass, 'trace' => 1);
-  $wsdl_url= "https://$soapdomain/live/ws/v2/subscription?wsdl";
+  $wsdl_url= "https://$soapdomain/live/smile/ws/v2/subscription?wsdl";
   use_soap_error_handler(false);
   try {
     $client = new SOAPClient($wsdl_url,$login);
@@ -87,7 +87,7 @@ function getRatingsForPeriod($periodID) {
 function getActivityStatementBatch($usn, $batchId) {
   global $soapuser, $soappass, $soapdomain;
   $login = array('login' => $soapuser,'password' => $soappass, 'trace' => 1);
-  $wsdl_url= "https://$soapdomain/live/ws/v2/subscription?wsdl";
+  $wsdl_url= "https://$soapdomain/live/smile/ws/v2/subscription?wsdl";
   use_soap_error_handler(false);
   try {
     $client = new SOAPClient($wsdl_url,$login);
@@ -116,7 +116,7 @@ function getActivityStatementBatch($usn, $batchId) {
 function getActivityStatementRange($usn, $startDate, $endDate) {
   global $soapuser, $soappass, $soapdomain;
   $login = array('login' => $soapuser,'password' => $soappass, 'trace' => 1);
-  $wsdl_url= "https://$soapdomain/live/ws/v2/subscription?wsdl";
+  $wsdl_url= "https://$soapdomain/live/smile/ws/v2/subscription?wsdl";
   use_soap_error_handler(false);
   try {
     $client = new SOAPClient($wsdl_url,$login);
